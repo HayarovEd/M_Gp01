@@ -4,16 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.eyegym.app.ui.screen.warmup_screen.WarmUpScreenRoot
+import com.eyegym.app.ui.navigation.NavController
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            WarmUpScreenRoot(
-                bottomRoutes = {}
-            )
+            NavController()
         }
     }
 }
