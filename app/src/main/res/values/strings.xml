@@ -11,4 +11,9 @@
     <string name="seconds">Секунд</string>
     <string name="begin_task">Начните разминку</string>
     <string name="start">Старт</string>
+    <string name="pause">Пауза</string>
+    <string name="tasl_completed">Разминка завершена</string>
+    <string name="cansel">Отмена</string>
+    <string name="complete">Завершить</string>
+    <string name="complete_task">Завершить разминку?</string>
 </resources>

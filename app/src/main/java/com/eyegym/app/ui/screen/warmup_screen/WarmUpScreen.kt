@@ -1,6 +1,5 @@
 package com.eyegym.app.ui.screen.warmup_screen
 
-import android.util.Log
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -57,6 +56,7 @@ import com.eyegym.app.ui.theme.background
 import com.eyegym.app.ui.theme.grey
 import com.eyegym.app.ui.theme.lightBlue
 import com.eyegym.app.ui.theme.violet
+import com.eyegym.app.ui.uikit.UiAlertDialog
 import com.eyegym.app.ui.uikit.UiIconButton
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -87,7 +87,7 @@ private fun WarmUpScreenScreen(
     val sheetState = rememberModalBottomSheetState()
     val scope = rememberCoroutineScope()
     var showBottomSheet by remember { mutableStateOf(false) }
-
+    var showStopAlertDialod by remember { mutableStateOf(false) }
     var currentImage by remember { mutableIntStateOf(0) }
 
     LaunchedEffect(
@@ -95,17 +95,27 @@ private fun WarmUpScreenScreen(
         key2 = state.taskDuration
     ) {
         val repeatTimes = state.taskDuration.duration * 1000 / REPEATE_TASK
-        Log.d("Test WARM UP", "taskDuration ${state.taskDuration.duration}")
-        Log.d("Test WARM UP", "repeatTimes $repeatTimes")
         if (state.warmUpState == WarmUpState.STARTED) {
             repeat(repeatTimes) {
                 delay(500.toLong())
                 currentImage = (currentImage + 1) % 2
-                Log.d("Test WARM UP", "currentImage $currentImage")
             }
         }
     }
 
+     if (showStopAlertDialod) {
+         UiAlertDialog(
+             title = stringResource(R.string.complete_task),
+             onClickCancel = {
+                 showStopAlertDialod = false
+                 onAction(WarmUpScreenAction.OnResumeTask)
+             },
+             onClickConfirm = {
+                 showStopAlertDialod = false
+                 onAction(WarmUpScreenAction.OnStopTask)
+             }
+         )
+     }
 
     Scaffold(
         topBar = {
@@ -151,6 +161,8 @@ private fun WarmUpScreenScreen(
                         UiIconButton(
                             icon = Icons.Default.Close,
                             onClick = {
+                                showStopAlertDialod = true
+                                onAction(WarmUpScreenAction.OnPauseTask)
                                // onAction(WarmUpScreenAction.OnStopTask)
                             }
                         )
@@ -178,6 +190,8 @@ private fun WarmUpScreenScreen(
                         UiIconButton(
                             icon = Icons.Default.Close,
                             onClick = {
+                                showStopAlertDialod = true
+                                onAction(WarmUpScreenAction.OnPauseTask)
                                 //onAction(WarmUpScreenAction.OnStopTask)
                             }
                         )
@@ -233,6 +247,8 @@ private fun WarmUpScreenScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceEvenly
         ) {
+            val minutes = state.remainingTime / 60
+            val seconds = state.remainingTime % 60
             when (state.warmUpState) {
                 WarmUpState.READY -> {
                     Image(
@@ -299,7 +315,7 @@ private fun WarmUpScreenScreen(
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
                         Text(
-                            text = stringResource(R.string.begin_task),
+                            text = stringResource(state.taskDuration.descriptionInt),
                             style = MaterialTheme.typography.titleLarge,
                         )
                         Spacer(modifier = modifier.height(16.dp))
@@ -309,8 +325,6 @@ private fun WarmUpScreenScreen(
                                 .clip(CircleShape)
                                 .background(violet),
                         ) {
-                            val minutes = state.remainingTime / 60
-                            val seconds = state.remainingTime % 60
                             Text(
                                 modifier = modifier
                                     .fillMaxWidth()
@@ -325,8 +339,47 @@ private fun WarmUpScreenScreen(
                     }
                 }
 
-                WarmUpState.PAUSED -> TODO()
-                WarmUpState.COMPLETED -> TODO()
+                WarmUpState.PAUSED -> {
+                    Image(
+                        painter = painterResource(state.taskDuration.image1Int),
+                        contentDescription = ""
+                    )
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                        Text(
+                            text = stringResource(R.string.pause),
+                            style = MaterialTheme.typography.titleLarge,
+                        )
+                        Spacer(modifier = modifier.height(16.dp))
+                        Box(
+                            modifier = modifier
+                                .size(150.dp)
+                                .clip(CircleShape)
+                                .background(lightBlue)
+                                .clickable {
+                                    onAction(WarmUpScreenAction.OnStartTask)
+                                },
+                        ) {
+                            Text(
+                                modifier = modifier
+                                    .fillMaxWidth()
+                                    .align(Alignment.Center),
+                                text = String.format("%02d:%02d", minutes, seconds),
+                                style = MaterialTheme.typography.titleLarge,
+                                fontSize = 40.sp,
+                                color = background,
+                                textAlign = TextAlign.Center
+                            )
+                        }
+                    }
+                }
+                WarmUpState.COMPLETED -> {
+                    Text(
+                        text = stringResource(R.string.tasl_completed),
+                        style = MaterialTheme.typography.titleLarge,
+                    )
+                }
             }
         }
     }
