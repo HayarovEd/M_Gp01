@@ -1,0 +1,11 @@
+package com.eyegym.app.di
+
+import com.eyegym.app.data.repository.AndroidServiceController
+import com.eyegym.app.domain.repository.ServiceController
+import org.koin.core.module.dsl.bind
+import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.module
+
+val repoModule = module {
+    singleOf(::AndroidServiceController) { bind<ServiceController>() }
+}
