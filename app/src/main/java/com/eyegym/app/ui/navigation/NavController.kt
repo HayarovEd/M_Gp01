@@ -10,6 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import com.eyegym.app.R
 import com.eyegym.app.ui.screen.current_tip_screen.CurrentTipScreenRoot
 import com.eyegym.app.ui.screen.favorite_tips_screen.FavoriteScreenRoot
+import com.eyegym.app.ui.screen.form_record_screen.FormScreenRoot
 import com.eyegym.app.ui.screen.record_screen.RecordScreenRoot
 import com.eyegym.app.ui.screen.tips_screen.TripsScreenRoot
 import com.eyegym.app.ui.screen.warmup_screen.WarmUpScreenRoot
@@ -96,19 +97,15 @@ fun NavController(
             )
         }
 
-        /*composable<NavigationRoute.DriverOrders> {
-            DriverOrdersScreenRoot(
-                bottomRoutes = {
-                    UiBottomNavigation(
-                        routes = adminRoutes,
-                        navController = navController
-                    )
+        composable<NavigationRoute.FormRecord> {
+            FormScreenRoot (
+                onBackPressed = {
+                    navController.navigateUp()
                 },
-                onNavigateToOrderScreen = {
-                    navController.navigate(NavigationRoute.DriverOrder(it))
-                }
             )
         }
+
+        /*
 
         composable<NavigationRoute.DriverCabinet> {
             DriverCabinetScreenRoot(

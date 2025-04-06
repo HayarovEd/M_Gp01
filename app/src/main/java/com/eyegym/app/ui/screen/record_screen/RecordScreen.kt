@@ -118,6 +118,7 @@ private fun RecordScreenScreen(
                         UiIconButton(
                             icon = Icons.Default.Search,
                             onClick = {
+                                showButtonRecord = false
                                 onAction(RecordScreenAction.OnSearch)
                             }
                         )

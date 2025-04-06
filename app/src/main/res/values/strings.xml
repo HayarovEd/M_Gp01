@@ -73,5 +73,14 @@
     <string name="optics_ph">Введите адрес или название оптики</string>
     <string name="opened">Открыто</string>
     <string name="full_form">Заполнить форму</string>
+    <string name="complete_form">Заполните форму</string>
+    <string name="fio">ФИО</string>
+    <string name="phone">Телефон</string>
+    <string name="reason">Причина обращения</string>
+    <string name="date">Дата</string>
+    <string name="time">Время</string>
+    <string name="ok">Ок</string>
+    <string name="to_send">Отправить</string>
+    <string name="wait">Заявка отправлена\nОжидайте звонка подтверждения</string>
 
 </resources>
