@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.eyegym.app.R
+import com.eyegym.app.ui.screen.tips_screen.TripsScreenRoot
 import com.eyegym.app.ui.screen.warmup_screen.WarmUpScreenRoot
 import com.eyegym.app.ui.uikit.UiBottomNavigation
 
@@ -43,6 +44,22 @@ fun NavController(
                     UiBottomNavigation(
                         navController = navController,
                         routes = routes)
+                }
+            )
+        }
+
+        composable<NavigationRoute.Trips> {
+            TripsScreenRoot (
+                bottomRoutes = {
+                    UiBottomNavigation(
+                        navController = navController,
+                        routes = routes)
+                },
+                onNavigateToFavorites = {
+                    navController.navigate(NavigationRoute.Favorite)
+                },
+                onNavigateToTip = {
+                    navController.navigate(NavigationRoute.CurrenTrip(it))
                 }
             )
         }

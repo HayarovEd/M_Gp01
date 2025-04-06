@@ -6,7 +6,10 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
+import androidx.room.Room
+import com.eyegym.app.data.local.FavoritesDataBase
 import com.eyegym.app.domain.utils.APP_PREFERENCES
+import com.eyegym.app.domain.utils.DATABASE
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -23,12 +26,12 @@ val baseModule = module {
             produceFile = { androidContext().preferencesDataStoreFile(APP_PREFERENCES) }
         )
     }
-    /*single<MeteoDataBase> {
+    single<FavoritesDataBase> {
         Room.databaseBuilder(
             androidContext(),
-            MeteoDataBase::class.java,
+            FavoritesDataBase::class.java,
             DATABASE
         )
             .build()
-    }*/
+    }
 }
