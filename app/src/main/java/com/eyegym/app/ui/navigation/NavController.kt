@@ -10,6 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import com.eyegym.app.R
 import com.eyegym.app.ui.screen.current_tip_screen.CurrentTipScreenRoot
 import com.eyegym.app.ui.screen.favorite_tips_screen.FavoriteScreenRoot
+import com.eyegym.app.ui.screen.record_screen.RecordScreenRoot
 import com.eyegym.app.ui.screen.tips_screen.TripsScreenRoot
 import com.eyegym.app.ui.screen.warmup_screen.WarmUpScreenRoot
 import com.eyegym.app.ui.uikit.UiBottomNavigation
@@ -78,6 +79,20 @@ fun NavController(
                 onBackPressed = {
                     navController.navigateUp()
                 },
+            )
+        }
+
+        composable<NavigationRoute.Record> {
+            RecordScreenRoot(
+                bottomRoutes = {
+                    UiBottomNavigation(
+                        navController = navController,
+                        routes = routes
+                    )
+                },
+                onNavigateToRecordForm = {
+                    navController.navigate(NavigationRoute.FormRecord(it))
+                }
             )
         }
 
