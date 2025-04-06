@@ -2,13 +2,14 @@ package com.eyegym.app.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.eyegym.app.R
+import com.eyegym.app.ui.screen.current_tip_screen.CurrentTipScreenRoot
+import com.eyegym.app.ui.screen.favorite_tips_screen.FavoriteScreenRoot
 import com.eyegym.app.ui.screen.tips_screen.TripsScreenRoot
 import com.eyegym.app.ui.screen.warmup_screen.WarmUpScreenRoot
 import com.eyegym.app.ui.uikit.UiBottomNavigation
@@ -18,7 +19,6 @@ fun NavController(
     startDestination: NavigationRoute = NavigationRoute.WarmUp,
 ) {
     val navController = rememberNavController()
-    val configuration = LocalConfiguration.current
     val routes = listOf(
         TopLevelRoute(
             stringResource(R.string.warmup),
@@ -63,28 +63,25 @@ fun NavController(
                 }
             )
         }
-        /*composable<NavigationRoute.Registration> {
-            RegistrationScreenRoot(
-                onNavigateToDriverProfile = {
-                    navController.navigate(NavigationRoute.DriverProfile)
+        composable<NavigationRoute.Favorite> {
+            FavoriteScreenRoot(
+                onBackPressed = {
+                    navController.navigateUp()
                 },
-                onNavigateToClientProfile = {
-                    navController.navigate(NavigationRoute.ClientProfile)
+                onNavigateToTip = {
+                    navController.navigate(NavigationRoute.CurrenTrip(it))
                 }
             )
         }
-        composable<NavigationRoute.DriverProfile> {
-            AdminProfileScreenRoot(
-                bottomRoutes = {
-                    UiBottomNavigation(
-                        routes = adminRoutes,
-                        navController = navController
-                    )
-                }
+        composable<NavigationRoute.CurrenTrip> {
+            CurrentTipScreenRoot(
+                onBackPressed = {
+                    navController.navigateUp()
+                },
             )
         }
 
-        composable<NavigationRoute.DriverOrders> {
+        /*composable<NavigationRoute.DriverOrders> {
             DriverOrdersScreenRoot(
                 bottomRoutes = {
                     UiBottomNavigation(
