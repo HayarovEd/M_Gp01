@@ -59,16 +59,27 @@ import com.eyegym.app.ui.theme.violet
 import com.eyegym.app.ui.uikit.UiAlertDialog
 import com.eyegym.app.ui.uikit.UiIconButton
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun WarmUpScreenRoot(
     viewModel: WarmUpScreenViewModel = koinViewModel(),
-    bottomRoutes: @Composable () -> Unit
+    bottomRoutes: @Composable () -> Unit,
+    onNavigateToSurvey: () -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-
+    LaunchedEffect(key1 = true){
+        viewModel.eventFlow.collectLatest { event ->
+            when (event) {
+                UiWarmUpEvents.IDL -> {}
+                UiWarmUpEvents.SURVEY -> {
+                    onNavigateToSurvey()
+                }
+            }
+        }
+    }
     WarmUpScreenScreen(
         state = state,
         bottomRoutes = bottomRoutes,

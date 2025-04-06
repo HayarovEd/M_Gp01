@@ -5,18 +5,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.eyegym.app.domain.model.mockOptics
-import com.eyegym.app.domain.repository.DataStoreRepository
 import com.eyegym.app.ui.navigation.NavigationRoute
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 
 class FormScreenViewModel(
     savedStateHandle: SavedStateHandle,
-    private val dataStoreRepository: DataStoreRepository
 ) : ViewModel() {
 
     val id = savedStateHandle.toRoute<NavigationRoute.FormRecord>().id
@@ -38,13 +35,10 @@ class FormScreenViewModel(
     fun onAction(action: FormScreenAction) {
         when (action) {
             FormScreenAction.OnSend -> {
-                viewModelScope.launch {
-                    dataStoreRepository.setCountStarts(0)
                     _state.value.copy(
                         isSending = true
                     )
                         .updateState()
-                }
             }
 
             is FormScreenAction.UpdateDate -> {

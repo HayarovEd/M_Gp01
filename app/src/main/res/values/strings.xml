@@ -82,5 +82,11 @@
     <string name="ok">Ок</string>
     <string name="to_send">Отправить</string>
     <string name="wait">Заявка отправлена\nОжидайте звонка подтверждения</string>
+    <string name="work_app">Оцените работу приложения</string>
+    <string name="answer">Ответ записан\nСпасибо, что уделили время!</string>
+    <string name="effect">Эффективность упражнений*</string>
+    <string name="material">Материал статей*</string>
+    <string name="record_u">Удобство записи в оптику*</string>
+    <string name="commit">Оставьте комментарий</string>
 
 </resources>

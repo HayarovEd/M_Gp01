@@ -12,6 +12,7 @@ import com.eyegym.app.ui.screen.current_tip_screen.CurrentTipScreenRoot
 import com.eyegym.app.ui.screen.favorite_tips_screen.FavoriteScreenRoot
 import com.eyegym.app.ui.screen.form_record_screen.FormScreenRoot
 import com.eyegym.app.ui.screen.record_screen.RecordScreenRoot
+import com.eyegym.app.ui.screen.survey_screen.SurveyScreenRoot
 import com.eyegym.app.ui.screen.tips_screen.TripsScreenRoot
 import com.eyegym.app.ui.screen.warmup_screen.WarmUpScreenRoot
 import com.eyegym.app.ui.uikit.UiBottomNavigation
@@ -46,6 +47,9 @@ fun NavController(
                     UiBottomNavigation(
                         navController = navController,
                         routes = routes)
+                },
+                onNavigateToSurvey = {
+                    navController.navigate(NavigationRoute.Survey)
                 }
             )
         }
@@ -104,85 +108,13 @@ fun NavController(
                 },
             )
         }
-
-        /*
-
-        composable<NavigationRoute.DriverCabinet> {
-            DriverCabinetScreenRoot(
-                bottomRoutes = {
-                    UiBottomNavigation(
-                        routes = adminRoutes,
-                        navController = navController
-                    )
-                }
-            )
-        }
-
-        composable<NavigationRoute.ClientProfile> {
-            ClientProfileScreenRoot(
-                bottomRoutes = {
-                    UiBottomNavigation(
-                        routes = clientRoutes,
-                        navController = navController
-                    )
-                }
-            )
-        }
-
-        composable<NavigationRoute.ClientExcursion> {
-            ClientExcursionScreenRoot(
-                bottomRoutes = {
-                    UiBottomNavigation(
-                        routes = clientRoutes,
-                        navController = navController
-                    )
-                },
-                onNavigateToExcursionScreen = {
-                    navController.navigate(NavigationRoute.Excursion(it))
-                }
-            )
-        }
-
-        composable<NavigationRoute.DriverOrder> {
-            DriverOrderScreenRoot(
-                onBackPressed = {
-                    navController.navigateUp()
-                }
-            )
-        }
-
-        composable<NavigationRoute.Excursion> {
-            ExcursionScreenRoot(
-                onBackPressed = {
-                    navController.navigateUp()
-                },
-                onNavigateToClientOrder = { orderId ->
-                    navController.navigate(NavigationRoute.ClientOrder(orderId))
-                }
-            )
-        }
-
-        composable<NavigationRoute.ClientOrder> {
-            ClientOrderScreenRoot(
+        composable<NavigationRoute.Survey> {
+            SurveyScreenRoot(
                 onBackPressed = {
                     navController.navigateUp()
                 },
             )
         }
-
-        composable<NavigationRoute.ClientCabinet> {
-            ClientCabinetScreenRoot(
-                bottomRoutes = {
-                    UiBottomNavigation(
-                        routes = clientRoutes,
-                        navController = navController
-                    )
-                },
-                onNavigateToClientOrder = { orderId ->
-                    navController.navigate(NavigationRoute.ClientOrder(orderId))
-                }
-            )
-        }*/
 
     }
 }

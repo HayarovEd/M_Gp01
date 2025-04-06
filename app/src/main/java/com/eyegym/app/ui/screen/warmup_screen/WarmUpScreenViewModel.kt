@@ -6,8 +6,10 @@ import com.eyegym.app.domain.repository.DataStoreRepository
 import com.eyegym.app.domain.repository.ServiceController
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
@@ -21,6 +23,9 @@ class WarmUpScreenViewModel(
 ) : ViewModel() {
 
     private var countdownJob: Job? = null
+
+    private val _eventFlow = MutableSharedFlow<UiWarmUpEvents>()
+    val eventFlow = _eventFlow.asSharedFlow()
 
     private val _state = MutableStateFlow(WarmUpScreenState())
     val state = _state
@@ -67,6 +72,10 @@ class WarmUpScreenViewModel(
                     delay(300)
                     if (state.value.countStarts<3) {
                         startCountdown(state.value.taskDuration.duration)
+                    } else {
+                        _eventFlow.emit(
+                            UiWarmUpEvents.SURVEY
+                        )
                     }
                 }
             }
