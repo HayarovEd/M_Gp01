@@ -1,5 +1,6 @@
 package com.eyegym.app.ui.screen.form_record_screen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -32,6 +33,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -43,6 +45,7 @@ import com.eyegym.app.R
 import com.eyegym.app.domain.model.mockOptics
 import com.eyegym.app.domain.utils.RUSSIAN_PHONE_MASK
 import com.eyegym.app.domain.utils.toDdMmYyyy
+import com.eyegym.app.ui.theme.background
 import com.eyegym.app.ui.theme.secondColor
 import com.eyegym.app.ui.theme.violet
 import com.eyegym.app.ui.uikit.MaskVisualTransformation
@@ -74,7 +77,7 @@ private fun FormScreenScreen(
 ) {
     var showTimePicker by remember { mutableStateOf(false) }
     var showDatePicker by remember { mutableStateOf(false) }
-
+    val keyboardController = LocalSoftwareKeyboardController.current
     val datePickerState = rememberDatePickerState()
     val timePickerState = rememberTimePickerState(
         is24Hour = true,
@@ -147,6 +150,7 @@ private fun FormScreenScreen(
             alignment = Alignment.Center
         ) {
             Column(
+                modifier = modifier.background(background),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 TimePicker(
@@ -281,6 +285,7 @@ private fun FormScreenScreen(
                 UiTextField(
                     modifier = modifier.clickable {
                         showDatePicker = true
+                        keyboardController?.hide()
                     },
                     label = stringResource(R.string.date),
                     content = state.dateRecord,
@@ -292,6 +297,7 @@ private fun FormScreenScreen(
                 UiTextField(
                     modifier = modifier.clickable {
                         showTimePicker = true
+                        keyboardController?.hide()
                     },
                     label = stringResource(R.string.time),
                     enabled = false,

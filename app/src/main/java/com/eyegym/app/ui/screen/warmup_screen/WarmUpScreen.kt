@@ -270,8 +270,10 @@ private fun WarmUpScreenScreen(
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
                         Text(
+                            modifier = modifier.fillMaxWidth(),
                             text = stringResource(R.string.begin_task),
                             style = MaterialTheme.typography.titleLarge,
+                            textAlign = TextAlign.Center
                         )
                         Spacer(modifier = modifier.height(16.dp))
                         Box(
@@ -326,8 +328,10 @@ private fun WarmUpScreenScreen(
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
                         Text(
+                            modifier = modifier.fillMaxWidth(),
                             text = stringResource(state.taskDuration.descriptionInt),
                             style = MaterialTheme.typography.titleLarge,
+                            textAlign = TextAlign.Center
                         )
                         Spacer(modifier = modifier.height(16.dp))
                         Box(
@@ -359,8 +363,10 @@ private fun WarmUpScreenScreen(
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
                         Text(
+                            modifier = modifier.fillMaxWidth(),
                             text = stringResource(R.string.pause),
                             style = MaterialTheme.typography.titleLarge,
+                            textAlign = TextAlign.Center
                         )
                         Spacer(modifier = modifier.height(16.dp))
                         Box(

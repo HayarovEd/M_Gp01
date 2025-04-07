@@ -1,6 +1,7 @@
 package com.eyegym.app.ui.screen.tips_screen
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -38,6 +39,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.eyegym.app.R
+import com.eyegym.app.ui.theme.grey
 import com.eyegym.app.ui.uikit.ItemTip
 import com.eyegym.app.ui.uikit.UiIconButton
 import org.koin.androidx.compose.koinViewModel
@@ -140,7 +142,10 @@ private fun TripsScreenScreen(
                 state.trips.keys.forEach { group ->
                     stickyHeader {
                         Row(
-                            modifier = modifier,
+                            modifier = modifier
+                                .fillMaxWidth()
+                                .background(grey)
+                                .padding(vertical = 4.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(

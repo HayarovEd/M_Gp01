@@ -5,8 +5,8 @@
     <string name="standard">Стандартная</string>
     <string name="full">Полная</string>
     <string name="fast_desc">Часто моргайте, увлажняя глаза</string>
-    <string name="standard_desc">Влево-вправо без поворота головы</string>
-    <string name="full_desc">Вверх-вниз плавно</string>
+    <string name="standard_desc">Двигайте глазами влево-вправо, без поворота головы</string>
+    <string name="full_desc">Двигайте глазом плавно вверх-вниз</string>
     <string name="task">Режим</string>
     <string name="seconds">Секунд</string>
     <string name="begin_task">Начните разминку</string>
